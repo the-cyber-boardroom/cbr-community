@@ -1,9 +1,5 @@
----
-title: CBR XYZ
----
-
-# cbr-xyz
-Repo for XYZ (replace with name of project). 
+# cbr-community
+Repo for CBR-Community (replace with name of project). 
 
 This is the template for the other projects and builds up the main CI/CD pipeline
 

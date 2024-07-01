@@ -1,12 +1,12 @@
 [tool.poetry]
-name        = "cbr_xyz"
+name        = "cbr_community"
 version     = "v0.3.1"
-description = "CBR - XYZ"
+description = "CBR - Community"
 authors     = ["Dinis Cruz <dinis.cruz@owasp.org>"]
 license     = "MIT"
 readme      = "README.md"
-homepage    = "https://github.com/the-cyber-boardroom/cbr-xyz"
-repository  = "https://github.com/the-cyber-boardroom/cbr-xyz"
+homepage    = "https://github.com/the-cyber-boardroom/cbr-community"
+repository  = "https://github.com/the-cyber-boardroom/cbr-community"
 
 [tool.poetry.dependencies]
 python          = "^3.7"

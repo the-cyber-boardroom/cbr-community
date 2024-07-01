@@ -6,11 +6,11 @@ on:
 
 env:
   DOCKER__CONTEXT     : "."
-  DOCKER__FILE        : './deploy/docker/cbr_xyz__from_pip/Dockerfile'
+  DOCKER__FILE        : './deploy/docker/cbr_community__from_pip/Dockerfile'
   DOCKER_HUB__USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKER_HUB__TOKEN   : ${{ secrets.DOCKERHUB_TOKEN    }}
   GIT__BRANCH         : 'main'
-  PACKAGE_NAME        : 'cbr_xyz'
+  PACKAGE_NAME        : 'cbr_community'
 
 jobs:
 
