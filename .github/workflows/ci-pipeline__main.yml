@@ -12,7 +12,7 @@ env:
 
   AWS_REGION: eu-west-1
   CBR__CUSTOM__PATH_CUSTOM_CODE: "/app/custom"
-  CBR__CUSTOM__PACKAGES_TO_INSTALL: '["cbr_website_beta"]'
+  CBR__CUSTOM__PACKAGES_TO_INSTALL: '["cbr_website_beta", "cbr_static"]'
   S3_DEV__BUCKET: "654654216424--cbr-deploy--eu-west-1"
   S3_DEV__PARENT_FOLDER: "cbr-custom-websites"
 

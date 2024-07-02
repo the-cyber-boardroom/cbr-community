@@ -11,10 +11,8 @@ runs:
 
     - name: Run script to update S3 and Lambda (on custom CBR)
       shell: bash
-      run: |   
-        ls -la
-        cp -R ${{ ENV.FOLDER__CBR_CUSTOM }}/custom /app/custom
-        # cp ./cbr_custom_websites/version /app/custom/version        
+      run: |           
+        cp -R ${{ ENV.FOLDER__CBR_CUSTOM }}/custom /app/custom        
         
         find /app/custom        
         
@@ -35,5 +33,3 @@ runs:
         echo "###########################################################################"
         echo "##### Try it out at https://groq.dev.aws.cyber-boardroom.com/web/home #####"
         echo "###########################################################################"
-        ls -la /app/custom
-        cat /app/custom/version
