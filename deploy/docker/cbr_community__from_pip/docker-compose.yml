@@ -1,8 +1,0 @@
-services:
-  cbr_community:
-    build:
-      context: ../../..
-      dockerfile: ./deploy/docker/cbr_community__from_pip/Dockerfile
-    platform: linux/amd64
-    container_name: cbr_community__from_pip
-    tty: true

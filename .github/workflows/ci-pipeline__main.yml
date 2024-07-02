@@ -5,72 +5,84 @@ on:
       - main
 
 env:
-  DOCKER__CONTEXT     : "."
-  DOCKER__FILE        : './deploy/docker/cbr_community__from_pip/Dockerfile'
-  DOCKER_HUB__USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-  DOCKER_HUB__TOKEN   : ${{ secrets.DOCKERHUB_TOKEN    }}
-  GIT__BRANCH         : 'main'
-  PACKAGE_NAME        : 'cbr_community'
+  GIT__BRANCH          : 'main'
+  PACKAGE_NAME         : 'cbr_community'
+  AWS_ACCESS_KEY_ID    : ${{ secrets.AWS_ACCESS_KEY_ID__470426667096     }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY__470426667096 }}
+
+  AWS_REGION: eu-west-1
+  CBR__CUSTOM__PATH_CUSTOM_CODE: "/app/custom"
+  CBR__CUSTOM__PACKAGES_TO_INSTALL: '["cbr_website_beta"]'
+  S3_DEV__BUCKET: "654654216424--cbr-deploy--eu-west-1"
+  S3_DEV__PARENT_FOLDER: "cbr-custom-websites"
 
 jobs:
 
-#  run-unit-tests:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v4
-#
-#      - name: Poetry - Install Dependencies
-#        uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/poetry__install@dev
-#        with:
-#          pip_install: '-r requirements-test.txt'
-#
-#      - name: Run Unit Tests (using Poetry)
-#        uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/poetry__run-unit-tests@dev
-#
-#  increment-tag:
-#    name: Increment Tag - MAIN
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v4
-#      - name: Increment Tag (for MAIN)
-#        uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/git__increment-tag@dev
-#        with:
-#          release_type : 'major'
-#
+
+  increment-tag:
+    name: Increment Tag - MAIN
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Increment Tag (for MAIN)
+        uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/git__increment-tag@dev
+        with:
+          release_type : 'major'
+
+  deploy-custom-version-community:
+    timeout-minutes: 5
+    name: "Deploy CBR - Community"
+    runs-on: ubuntu-latest
+    container:
+      image: diniscruz/cbr_website_beta:latest
+      options: --platform linux/amd64
+    env:
+      S3_DEV__VERSION   : 'custom-version__cbr_community'
+      FOLDER__CBR_CUSTOM: "cbr_community"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.GIT__BRANCH }}
+      - name: Deploy Custom code
+        uses: ./.github/actions/deploy-cbr-custom-site
+    needs:
+      - increment-tag
+
 #    needs:
 #      - run-unit-tests
 
-  publish-to-pypi:
-    permissions:
-      id-token: write
-    name: "Publish to PYPI"
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GIT_HUB__ACCESS_TOKEN }}
-          ref: dev
-      - name: publish-to-pypi
-        uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/pypi__publish@dev
+#  publish-to-pypi:
+#    permissions:
+#      id-token: write
+#    name: "Publish to PYPI"
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v4
+#        with:
+#          token: ${{ secrets.GIT_HUB__ACCESS_TOKEN }}
+#          ref: dev
+#      - name: publish-to-pypi
+#        uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/pypi__publish@dev
+##    needs:
+##      - increment-tag
+#
+#
+#  publish-to-docker-hub:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout Code
+#        uses: actions/checkout@v4
+#
+#      - name: Git Update Current Branch
+#        uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/git__update_branch@dev
+#
+#      - name: Set $Version from file
+#        uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/git__read_version@dev
+#
+#      - name: Deploy to Docker Hub
+#        uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/docker-hub__publish@dev
 #    needs:
-#      - increment-tag
-
-
-  publish-to-docker-hub:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Git Update Current Branch
-        uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/git__update_branch@dev
-
-      - name: Set $Version from file
-        uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/git__read_version@dev
-
-      - name: Deploy to Docker Hub
-        uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/docker-hub__publish@dev
-    needs:
-      - publish-to-pypi
+#      - publish-to-pypi

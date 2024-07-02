@@ -1,0 +1,38 @@
+name: 'Test Action'
+description: 'Test Action'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Run script to update S3 and Lambda (on custom CBR)
+      shell: bash
+      run: |      
+        cp -R ./cbr_custom_websites/${{ ENV.FOLDER__CBR_CUSTOM }}/custom /app/custom
+        cp ./cbr_custom_websites/version /app/custom/version        
+        
+        find /app/custom        
+        
+        export CBR__CUSTOM__VERSION_FILE=$S3_DEV__VERSION
+        export CBR__CUSTOM__LAMBDA_NAME=$S3_DEV__VERSION
+        
+        export PYTHONPATH=/tmp
+
+        echo "****** UPDATING S3 with current custom code ******"
+        cbr_website_beta=/usr/local/lib/python3.12/site-packages/cbr_website_beta
+        python__publish_to_s3=${cbr_website_beta}/utils/update_from_s3/CBR__Publish_To_S3__Custom_Version.py
+        python__create_lambda=${cbr_website_beta}/utils/update_from_s3/CBR__Custom__Deploy_Lambda.py
+
+        python $python__publish_to_s3
+        python $python__create_lambda
+        echo "###################################"
+        echo "##### Deployment complete     #####
+        echo "###########################################################################"
+        echo "##### Try it out at https://groq.dev.aws.cyber-boardroom.com/web/home #####"
+        echo "###########################################################################"
+        ls -la /app/custom
+        cat /app/custom/version

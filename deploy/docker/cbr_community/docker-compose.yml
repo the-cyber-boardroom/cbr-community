@@ -1,0 +1,18 @@
+services:
+  cbr_community:
+    image: diniscruz/cbr_website_beta:latest
+    platform: linux/amd64
+    container_name: cbr_community
+    tty: true
+    env_file:
+      - .env
+    ports:
+      - "5115:3000"
+    volumes:
+      - ./custom:/app/custom
+      - ./cbr__run_locally.sh:/app/cbr__run_locally.sh
+
+    #pull_policy: always
+
+    entrypoint: ["./cbr__run_locally.sh"]
+
