@@ -38,7 +38,7 @@ jobs:
       image: diniscruz/cbr_website_beta:latest
       options: --platform linux/amd64
     env:
-      S3_DEV__VERSION   : 'custom-version__cbr_community'
+      S3_DEV__VERSION   : 'prod__custom-version__cbr_community'
       FOLDER__CBR_CUSTOM: "./cbr_community"
     steps:
       - name: Checkout repository
