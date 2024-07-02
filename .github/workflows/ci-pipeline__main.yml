@@ -20,7 +20,6 @@ jobs:
 
 
   increment-tag:
-    if: False
     name: Increment Tag - MAIN
     runs-on: ubuntu-latest
     steps:
