@@ -14,12 +14,13 @@ env:
   CBR__CUSTOM__PATH_CUSTOM_CODE: "/app/custom"
   CBR__CUSTOM__PACKAGES_TO_INSTALL: '["cbr_website_beta"]'
   S3_DEV__BUCKET: "654654216424--cbr-deploy--eu-west-1"
-  S3_DEV__PARENT_FOLDER: "../cbr_community/cbr-custom-websites"
+  S3_DEV__PARENT_FOLDER: "cbr-custom-websites"
 
 jobs:
 
 
   increment-tag:
+    if: False
     name: Increment Tag - MAIN
     runs-on: ubuntu-latest
     steps:
@@ -38,7 +39,7 @@ jobs:
       options: --platform linux/amd64
     env:
       S3_DEV__VERSION   : 'custom-version__cbr_community'
-      FOLDER__CBR_CUSTOM: "cbr_community"
+      FOLDER__CBR_CUSTOM: "../cbr_community"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -46,8 +47,8 @@ jobs:
           ref: ${{ env.GIT__BRANCH }}
       - name: Deploy Custom code
         uses: ./.github/actions/deploy-cbr-custom-site
-    needs:
-      - increment-tag
+#    needs:
+#      - increment-tag
 
 #    needs:
 #      - run-unit-tests
