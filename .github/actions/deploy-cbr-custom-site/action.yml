@@ -12,7 +12,7 @@ runs:
     - name: Run script to update S3 and Lambda (on custom CBR)
       shell: bash
       run: |   
-        la -la
+        ls -la
         cp -R ${{ ENV.FOLDER__CBR_CUSTOM }}/custom /app/custom
         # cp ./cbr_custom_websites/version /app/custom/version        
         
