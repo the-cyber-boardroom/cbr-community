@@ -39,7 +39,7 @@ jobs:
       options: --platform linux/amd64
     env:
       S3_DEV__VERSION   : 'custom-version__cbr_community'
-      FOLDER__CBR_CUSTOM: "../cbr_community"
+      FOLDER__CBR_CUSTOM: "./cbr_community"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
