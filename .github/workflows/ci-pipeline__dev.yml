@@ -1,5 +1,7 @@
 name       : CI Pipeline - DEV
 on:
+  repository_dispatch:
+    types: [ deploy-community-dev ]
   push:
     branches:
       - dev
