@@ -27,8 +27,8 @@ runs:
       shell: bash
       run: |           
         ls -la
-        python_pakages=/usr/local/lib/python3.12/site-packages
-        ls python_pakages -la
+        export python_pakages=/usr/local/lib/python3.12/site-packages
+        ls $python_pakages -la
         ls ${{ ENV.FOLDER__CBR_CUSTOM }}
         cp -R ${{ ENV.FOLDER__CBR_CUSTOM }}/custom $python_pakages                                
         
