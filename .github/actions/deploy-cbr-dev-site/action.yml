@@ -9,6 +9,15 @@ runs:
       with:
         aws-region: ${{ env.AWS_REGION }}
 
+    - uses: actions/checkout@v4
+
+    - name: Install CBR Website Beta (from PIP)
+      shell: bash
+      run: |
+        python --version
+        pip install cbr_website_beta
+        pip list
+
     - name: Run script to update S3 and Lambda (on custom CBR)
       shell: bash
       run: |           

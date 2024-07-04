@@ -1,7 +1,7 @@
-name       : CI Pipeline - DEV
+name       : CI Pipeline - DEV (QA)
 on:
   repository_dispatch:
-    types: [ deploy-community-dev ]
+    types: [ deploy-community-qa ]
   push:
     branches:
       - dev
@@ -20,13 +20,25 @@ env:
 
 jobs:
 
+  increment-tag:
+    name: Increment Tag - DEV
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Increment Tag (for DEV)
+        uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/git__increment-tag@dev
+        with:
+          release_type : 'minor'
 
-  deploy-cbr-community-dev:
+  deploy-custom-version-community:
     timeout-minutes: 5
     name: "Deploy CBR - Community"
     runs-on: ubuntu-latest
+    container:
+      image: diniscruz/cbr_website_beta:latest
+      options: --platform linux/amd64
     env:
-      S3_DEV__VERSION   : 'dev__custom-version__cbr_community'
+      S3_DEV__VERSION   : 'qa__custom-version__cbr_community'
       FOLDER__CBR_CUSTOM: "./cbr_community"
     steps:
       - name: Checkout repository
@@ -34,7 +46,7 @@ jobs:
         with:
           ref: ${{ env.GIT__BRANCH }}
       - name: Deploy Custom code
-        uses: ./.github/actions/deploy-cbr-dev-site
+        uses: ./.github/actions/deploy-cbr-custom-site
     needs:
       - increment-tag
 
