@@ -37,7 +37,7 @@ runs:
         find $python_pakages/cbr_static
         echo "************************  original ************************"
         
-        cp -R $CBR__CUSTOM__PATH_CUSTOM_CODE $python_pakages
+        cp -R $CBR__CUSTOM__PATH_CUSTOM_CODE/* $python_pakages
         
         echo "************************  original ************************"
         find $python_pakages/cbr_static
