@@ -49,13 +49,33 @@ runs:
 
         echo "****** UPDATING S3 with current custom code ******"
         export python_pakages=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
+        
+        echo "************************  BEFORE ************************"
+        ls $python_pakages/cbr_static
+        ls $python_pakages/cbr_static/content
+        ls $python_pakages/cbr_static/content/en
+        ls $python_pakages/cbr_static/content/en/web-pages
+        ls $python_pakages/cbr_static/content/en/web-pages/community
+        echo "************************  BEFORE ************************"
+        
         cbr_website_beta=$python_pakages/cbr_website_beta
         
         python__publish_to_s3=${cbr_website_beta}/utils/update_from_s3/CBR__Publish_To_S3__Custom_Version.py
         python__create_lambda=${cbr_website_beta}/utils/update_from_s3/CBR__Custom__Deploy_Lambda.py
 
         python $python__publish_to_s3
+        
+        echo "************************  AFTER ************************"
+        ls $python_pakages/cbr_static
+        ls $python_pakages/cbr_static/content
+        ls $python_pakages/cbr_static/content/en
+        ls $python_pakages/cbr_static/content/en/web-pages
+        ls $python_pakages/cbr_static/content/en/web-pages/community
+        echo "************************  AFTER ************************"
+        
+        
         python $python__create_lambda
         echo "###################################"
         echo "##### Deployment complete     #####"
         echo "###########################################################################"
+        
