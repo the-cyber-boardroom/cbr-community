@@ -24,14 +24,14 @@ runs:
         pip list    
         pip show cbr_static
 
-#    - name: Copy custom code to Python site-packages
-#      shell: bash
-#      run: |
-#        export python_pakages=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
-#        #ls $python_pakages -la
-#        #ls ${{ ENV.FOLDER__CBR_CUSTOM }}
-#        find ${{ ENV.FOLDER__CBR_CUSTOM }}/custom
-#        cp -R ${{ ENV.FOLDER__CBR_CUSTOM }}/custom $python_pakages
+    - name: Copy custom code to Python site-packages
+      shell: bash
+      run: |
+        export python_pakages=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
+        #ls $python_pakages -la
+        #ls ${{ ENV.FOLDER__CBR_CUSTOM }}
+        find $CBR__CUSTOM__PATH_CUSTOM_CODE
+        cp -R $CBR__CUSTOM__PATH_CUSTOM_CODE $python_pakages
 
     - name: Run script to update S3 and Lambda (on custom CBR)
       shell: bash
@@ -55,7 +55,7 @@ runs:
         ls $python_pakages/cbr_static/content
         ls $python_pakages/cbr_static/content/en
         ls $python_pakages/cbr_static/content/en/web-pages
-        #ls $python_pakages/cbr_static/content/en/web-pages/community
+        ls $python_pakages/cbr_static/content/en/web-pages/community
         echo "************************  BEFORE ************************"
         
         cbr_website_beta=$python_pakages/cbr_website_beta
