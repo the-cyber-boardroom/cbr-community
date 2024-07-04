@@ -55,7 +55,7 @@ runs:
         ls $python_pakages/cbr_static/content
         ls $python_pakages/cbr_static/content/en
         ls $python_pakages/cbr_static/content/en/web-pages
-        ls $python_pakages/cbr_static/content/en/web-pages/community
+        #ls $python_pakages/cbr_static/content/en/web-pages/community
         echo "************************  BEFORE ************************"
         
         cbr_website_beta=$python_pakages/cbr_website_beta
