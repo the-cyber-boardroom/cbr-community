@@ -31,7 +31,17 @@ runs:
         #ls $python_pakages -la
         #ls ${{ ENV.FOLDER__CBR_CUSTOM }}
         find $CBR__CUSTOM__PATH_CUSTOM_CODE
+        echo "************************  packages ************************"
+        ls -la $python_pakages
+        echo "************************  original ************************"
+        find $python_pakages/cbr_static
+        echo "************************  original ************************"
+        
         cp -R $CBR__CUSTOM__PATH_CUSTOM_CODE $python_pakages
+        
+        echo "************************  original ************************"
+        find $python_pakages/cbr_static
+        echo "************************  original ************************"
 
     - name: Run script to update S3 and Lambda (on custom CBR)
       shell: bash
