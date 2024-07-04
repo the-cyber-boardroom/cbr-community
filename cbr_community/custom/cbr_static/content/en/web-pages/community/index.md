@@ -18,6 +18,14 @@ Please use the Issues in this repo to submit ideas, comments or bugs: [cbr-commu
 - [speak in 3 languages](/web/chat/three-system-prompts)
 - [speak in 6 languages](/web/chat/six-languages)
 
+### test graph
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
 
 ------
 [edit this page](https://github.com/the-cyber-boardroom/cbr-community/edit/dev/cbr_community/custom/cbr_static/content/en/web-pages/community/index.md)
