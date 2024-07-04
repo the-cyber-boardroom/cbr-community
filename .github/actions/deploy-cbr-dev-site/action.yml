@@ -24,20 +24,19 @@ runs:
         pip list    
         pip show cbr_static
 
-    - name: Copy custom code to Python site-packages
-      shell: bash
-      run: |
-        export python_pakages=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
-        #ls $python_pakages -la
-        #ls ${{ ENV.FOLDER__CBR_CUSTOM }}
-        find ${{ ENV.FOLDER__CBR_CUSTOM }}/custom
-        cp -R ${{ ENV.FOLDER__CBR_CUSTOM }}/custom $python_pakages
+#    - name: Copy custom code to Python site-packages
+#      shell: bash
+#      run: |
+#        export python_pakages=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
+#        #ls $python_pakages -la
+#        #ls ${{ ENV.FOLDER__CBR_CUSTOM }}
+#        find ${{ ENV.FOLDER__CBR_CUSTOM }}/custom
+#        cp -R ${{ ENV.FOLDER__CBR_CUSTOM }}/custom $python_pakages
 
     - name: Run script to update S3 and Lambda (on custom CBR)
       shell: bash
       run: |
-        #ls -la
-        pip show cbr_static
+        #ls -la        
         export CBR__CUSTOM__VERSION_FILE=$S3_DEV__VERSION
         export CBR__CUSTOM__LAMBDA_NAME=$S3_DEV__VERSION
 
@@ -53,5 +52,5 @@ runs:
         python $python__publish_to_s3
         python $python__create_lambda
         echo "###################################"
-        echo "##### Deployment complete     #####
+        echo "##### Deployment complete     #####"
         echo "###########################################################################"

@@ -29,5 +29,5 @@ runs:
         python $python__publish_to_s3
         python $python__create_lambda
         echo "###################################"
-        echo "##### Deployment complete     #####
+        echo "##### Deployment complete     #####"
         echo "###########################################################################"
