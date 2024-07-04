@@ -24,28 +24,32 @@ runs:
         pip list    
         pip show cbr_static
 
-#        export python_pakages=/usr/local/lib/python3.12/site-packages
-#        ls $python_pakages -la
-#        ls ${{ ENV.FOLDER__CBR_CUSTOM }}
-#        cp -R ${{ ENV.FOLDER__CBR_CUSTOM }}/custom $python_pakages
-#
-#    - name: Run script to update S3 and Lambda (on custom CBR)
-#      shell: bash
-#      run: |
-#        ls -la
-#        pip show cbr_static
-#        export CBR__CUSTOM__VERSION_FILE=$S3_DEV__VERSION
-#        export CBR__CUSTOM__LAMBDA_NAME=$S3_DEV__VERSION
-#
-#        export PYTHONPATH=/tmp
-#
-#        echo "****** UPDATING S3 with current custom code ******"
-#        cbr_website_beta=/usr/local/lib/python3.12/site-packages/cbr_website_beta
-#        python__publish_to_s3=${cbr_website_beta}/utils/update_from_s3/CBR__Publish_To_S3__Custom_Version.py
-#        python__create_lambda=${cbr_website_beta}/utils/update_from_s3/CBR__Custom__Deploy_Lambda.py
-#
-#        python $python__publish_to_s3
-#        python $python__create_lambda
-#        echo "###################################"
-#        echo "##### Deployment complete     #####
-#        echo "###########################################################################"
+    - name: Copy custom code to Python site-packages
+      shell: bash
+      run: |
+        export python_pakages=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
+        ls $python_pakages -la
+        ls ${{ ENV.FOLDER__CBR_CUSTOM }}
+        find ${{ ENV.FOLDER__CBR_CUSTOM }}/custom
+        cp -R ${{ ENV.FOLDER__CBR_CUSTOM }}/custom $python_pakages
+
+    - name: Run script to update S3 and Lambda (on custom CBR)
+      shell: bash
+      run: |
+        ls -la
+        pip show cbr_static
+        export CBR__CUSTOM__VERSION_FILE=$S3_DEV__VERSION
+        export CBR__CUSTOM__LAMBDA_NAME=$S3_DEV__VERSION
+
+        export PYTHONPATH=/tmp
+
+        echo "****** UPDATING S3 with current custom code ******"
+        cbr_website_beta=/usr/local/lib/python3.12/site-packages/cbr_website_beta
+        python__publish_to_s3=${cbr_website_beta}/utils/update_from_s3/CBR__Publish_To_S3__Custom_Version.py
+        python__create_lambda=${cbr_website_beta}/utils/update_from_s3/CBR__Custom__Deploy_Lambda.py
+
+        python $python__publish_to_s3
+        python $python__create_lambda
+        echo "###################################"
+        echo "##### Deployment complete     #####
+        echo "###########################################################################"
