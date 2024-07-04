@@ -36,7 +36,12 @@ runs:
     - name: Run script to update S3 and Lambda (on custom CBR)
       shell: bash
       run: |
-        #ls -la        
+        ls -la
+        echo "--------------"
+        echo $CBR__CUSTOM__PATH_CUSTOM_CODE
+        ls -la $CBR__CUSTOM__PATH_CUSTOM_CODE
+        echo "--------------"
+        
         export CBR__CUSTOM__VERSION_FILE=$S3_DEV__VERSION
         export CBR__CUSTOM__LAMBDA_NAME=$S3_DEV__VERSION
 
