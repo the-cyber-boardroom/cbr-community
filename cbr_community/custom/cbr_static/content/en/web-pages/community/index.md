@@ -4,11 +4,11 @@ Welcome to Community Edition of the The Cyber Boardroom, here you will be able t
 
 ### GitHub Repo
 
-This version is hosted on https://github.com/the-cyber-boardroom/cbr-community/
+This version is hosted on the public repo [the-cyber-boardroom/cbr-community](https://github.com/the-cyber-boardroom/cbr-community/)
 
 ### Report issues
 
-Please use the Issues in this repo to submit ideas, comments or bugs: https://github.com/the-cyber-boardroom/cbr-community/issues
+Please use the Issues in this repo to submit ideas, comments or bugs: [cbr-community/issues](https://github.com/the-cyber-boardroom/cbr-community/issues)
 ### UI Experiments:
 
 - [Three LLMs](/web/chat/three-llms)
@@ -17,3 +17,7 @@ Please use the Issues in this repo to submit ideas, comments or bugs: https://gi
 - [three-board-members](/web/chat/three-board-members)
 - [speak in 3 languages](/web/chat/three-system-prompts)
 - [speak in 6 languages](/web/chat/six-languages)
+
+
+------
+[edit this page](https://github.com/the-cyber-boardroom/cbr-community/edit/dev/cbr_community/custom/cbr_static/content/en/web-pages/community/index.md)
