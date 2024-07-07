@@ -23,8 +23,8 @@ runs:
         pip install cbr_website_beta
         pip list
 
-    - name: Deploy Custom code
-      uses: ./.github/actions/deploy-cbr-dev-site
+    - name: Update CBR Content (from git repo)
+      uses: ./.github/actions/update-cbr-content
 
 #    - name: Copy custom code to Python site-packages
 #      shell: bash
