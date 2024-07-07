@@ -13,10 +13,11 @@ runs:
         python_path=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
         ls -la $python_path
 
-#        tmp_folder=/tmp
-#        $python_path__cbr_content=$python_path/cbr-content
-#        echo "*** python_path: $python_path ***"
-#        ls -la $python_path
+        tmp_folder=/tmp
+        $python_path__cbr_content=$python_path/cbr_content
+        echo "*** python_path: $python_path__cbr_content ***"
+        ls -la $python_path__cbr_content
+
 #        echo "*** $python_path__cbr_content ***"
 #        ls -ls $python_path__cbr_content
 #        cd $tmp_folder
