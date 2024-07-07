@@ -35,5 +35,9 @@ jobs:
           ref: ${{ env.GIT__BRANCH }}
       - name: Deploy Custom code
         uses: ./.github/actions/deploy-cbr-dev-site
+        env:
+          VERSION: ${{ github.event.client_payload.version }}
+
+
 
 

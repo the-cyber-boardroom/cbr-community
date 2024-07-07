@@ -20,7 +20,13 @@ runs:
       shell: bash
       run: |
         python --version
-        pip install cbr_website_beta
+        if [ -n "$VERSION" ]; then
+          echo "Installing CBR Website Beta version: $VERSION"
+          pip install cbr_website_beta==$VERSION
+        else
+        echo "Installing latest CBR Website Beta from pip" 
+          pip install cbr_website_beta
+        fi
         pip list
 
     - name: Update CBR Content (from git repo)
