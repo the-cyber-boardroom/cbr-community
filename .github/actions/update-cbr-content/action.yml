@@ -7,22 +7,19 @@ runs:
 
     - name: clone repo
       shell: bash
-      run: |        
-        pip show cbr_static
-        pip show cbr_content        
-        python_path=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
-        ls -la $python_path
+      run: |                        
+        python_path=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages        
 
         tmp_folder=/tmp
-        $python_path__cbr_content=$python_path/cbr_content
-        echo "*** python_path: $python_path__cbr_content ***"
-        ls -la $python_path__cbr_content
+        python_path__cbr_content=$python_path/cbr_content                
 
-#        echo "*** $python_path__cbr_content ***"
-#        ls -ls $python_path__cbr_content
-#        cd $tmp_folder
-#        git clone https://github.com/the-cyber-boardroom/cbr-content.git /tmp
-#        echo "*** $tmp_folder ***"
-#        ls -la $tmp_folder
-#        cp -R $tmp_folder/cbr-content/cbr_content/* $python_path__cbr_content
+        cd $tmp_folder
+        git clone https://github.com/the-cyber-boardroom/cbr-content.git /tmp
+        
+        ls $tmp_folder
+        ls $tmp_folder/cbr-content
+        ls $tmp_folder/cbr-content/cbr_content
+        
+        cp -R $tmp_folder/cbr-content/cbr_content/* $python_path__cbr_content
+        find $python_path__cbr_content
         
