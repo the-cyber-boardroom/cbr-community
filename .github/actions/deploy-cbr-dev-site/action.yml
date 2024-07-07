@@ -23,30 +23,33 @@ runs:
         pip install cbr_website_beta
         pip list
 
-    - name: Copy custom code to Python site-packages
-      shell: bash
-      run: |
-        export python_pakages=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages        
-        cp -R $CBR__CUSTOM__PATH_CUSTOM_CODE/* $python_pakages                
+    - name: Deploy Custom code
+      uses: ./.github/actions/deploy-cbr-dev-site
 
-    - name: Run script to update S3 and Lambda (on custom CBR)
-      shell: bash
-      run: |                
-        export CBR__CUSTOM__VERSION_FILE=$S3_DEV__VERSION
-        export CBR__CUSTOM__LAMBDA_NAME=$S3_DEV__VERSION
-        export PYTHONPATH=/tmp
-
-        echo "****** UPDATING S3 with current custom code ******"
-        export python_pakages=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages              
-        
-        cbr_website_beta=$python_pakages/cbr_website_beta
-        
-        python__publish_to_s3=${cbr_website_beta}/utils/update_from_s3/CBR__Publish_To_S3__Custom_Version.py
-        python__create_lambda=${cbr_website_beta}/utils/update_from_s3/CBR__Custom__Deploy_Lambda.py
-
-        python $python__publish_to_s3
-        python $python__create_lambda
-        echo "###################################"
-        echo "##### Deployment complete     #####"
-        echo "###########################################################################"
+#    - name: Copy custom code to Python site-packages
+#      shell: bash
+#      run: |
+#        export python_pakages=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
+#        cp -R $CBR__CUSTOM__PATH_CUSTOM_CODE/* $python_pakages
+#
+#    - name: Run script to update S3 and Lambda (on custom CBR)
+#      shell: bash
+#      run: |
+#        export CBR__CUSTOM__VERSION_FILE=$S3_DEV__VERSION
+#        export CBR__CUSTOM__LAMBDA_NAME=$S3_DEV__VERSION
+#        export PYTHONPATH=/tmp
+#
+#        echo "****** UPDATING S3 with current custom code ******"
+#        export python_pakages=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
+#
+#        cbr_website_beta=$python_pakages/cbr_website_beta
+#
+#        python__publish_to_s3=${cbr_website_beta}/utils/update_from_s3/CBR__Publish_To_S3__Custom_Version.py
+#        python__create_lambda=${cbr_website_beta}/utils/update_from_s3/CBR__Custom__Deploy_Lambda.py
+#
+#        python $python__publish_to_s3
+#        python $python__create_lambda
+#        echo "###################################"
+#        echo "##### Deployment complete     #####"
+#        echo "###########################################################################"
         

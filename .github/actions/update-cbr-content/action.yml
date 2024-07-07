@@ -1,0 +1,14 @@
+name: 'Update CBR Content'
+description: 'Test Action'
+
+runs:
+  using: 'composite'
+  steps:
+
+    - name: clone repo
+      shell: bash
+      run: |
+        python --version
+        pip show cbr_content
+        git --version    
+        
