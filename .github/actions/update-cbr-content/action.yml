@@ -14,7 +14,7 @@ runs:
         python_path__cbr_content=$python_path/cbr_content                
 
         cd $tmp_folder
-        git clone https://github.com/the-cyber-boardroom/cbr-content.git /tmp
+        git clone https://github.com/the-cyber-boardroom/cbr-content.git /tmp/cbr-content
         
         ls $tmp_folder
         ls $tmp_folder/cbr-content
