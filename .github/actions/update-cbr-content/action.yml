@@ -7,8 +7,11 @@ runs:
 
     - name: clone repo
       shell: bash
-      run: |
-        python --version
-        pip show cbr_content
-        git --version    
+      run: |        
+        python_path=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
+        tmp_folder=/tmp
+        $python_path__cbr_content=$python_path/cbr_content
+        cd $tmp_folder
+        git clone https://github.com/the-cyber-boardroom/cbr-content.git /tmp
+        cp -R $tmp_folder/cbr_content/* $python_path__cbr_content
         
