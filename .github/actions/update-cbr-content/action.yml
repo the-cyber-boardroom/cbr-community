@@ -1,5 +1,5 @@
 name: 'Update CBR Content'
-description: 'Test Action'
+description: 'Update CBR Content'
 
 runs:
   using: 'composite'

@@ -20,6 +20,15 @@ env:
 
 jobs:
 
+  wait-for-pypi-publish:
+    name: Wait for PYPI Publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: wait_for_pip_package
+        uses: ./.github/actions/wait_for_pip_package
+        env:
+          VERSION: ${{ github.event.client_payload.version }}
 
   deploy-cbr-community-dev:
     timeout-minutes: 5
@@ -37,7 +46,5 @@ jobs:
         uses: ./.github/actions/deploy-cbr-dev-site
         env:
           VERSION: ${{ github.event.client_payload.version }}
-
-
-
-
+    needs:
+      - wait-for-pypi-publish

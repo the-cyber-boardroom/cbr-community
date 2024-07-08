@@ -1,0 +1,39 @@
+name: 'Wait for PyPI Package'
+description: 'Wait for PyPI package '
+
+
+runs:
+  using: 'composite'
+  steps:
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Git Update Current Branch
+        uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/git__update_branch@dev
+
+      - name: Set $Version from file
+        uses: owasp-sbot/OSBot-GitHub-Actions/.github/actions/git__read_version@dev
+
+      - name: Check PyPI Package Version
+        shell: bash
+        id: check-pypi-version
+        run: |
+          if [ -n "$VERSION" ]; then          
+            echo "Checking if package version $VERSION is available on PyPI..."
+            for i in {1..10}; do
+              echo "Attempt $i: Trying to install ${PACKAGE_NAME}==$VERSION..."            
+              pip install --no-deps  ${PACKAGE_NAME} || true
+              INSTALLED_VERSION=$(pip show ${PACKAGE_NAME} 2>/dev/null | grep Version | awk '{print $2}')
+              pip uninstall -y ${PACKAGE_NAME}
+              if [ "$INSTALLED_VERSION" == "$VERSION" ]; then
+                echo "Package version $VERSION is successfully installed."              
+                exit 0
+              fi
+              echo "Waiting for package version $VERSION to be available on PyPI..."
+              sleep 10
+            done
+            echo "Package version $VERSION is not available on PyPI after multiple attempts."
+            exit 1
+          fi
