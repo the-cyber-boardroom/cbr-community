@@ -21,12 +21,12 @@ runs:
         id: check-pypi-version
         run: |
           if [ -n "$VERSION" ]; then          
-            echo "Checking if package version $VERSION is available on PyPI..."
+            echo "Checking if cbr_website_beta package version $VERSION is available on PyPI..."
             for i in {1..10}; do
-              echo "Attempt $i: Trying to install ${PACKAGE_NAME}==$VERSION..."            
-              pip install --no-deps  ${PACKAGE_NAME} || true
-              INSTALLED_VERSION=$(pip show ${PACKAGE_NAME} 2>/dev/null | grep Version | awk '{print $2}')
-              pip uninstall -y ${PACKAGE_NAME}
+              echo "Attempt $i: Trying to install cbr_website_beta==$VERSION..."            
+              pip install --no-deps  cbr_website_beta || true
+              INSTALLED_VERSION=$(pip show cbr_website_beta 2>/dev/null | grep Version | awk '{print $2}')
+              pip uninstall -y cbr_website_beta
               if [ "$INSTALLED_VERSION" == "$VERSION" ]; then
                 echo "Package version $VERSION is successfully installed."              
                 exit 0
