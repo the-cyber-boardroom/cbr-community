@@ -14,7 +14,7 @@ env:
   CBR__CONFIG_FILE                : 'cbr-website.community-cbr-hosted.toml'
   AWS_REGION                      : eu-west-1
   CBR__CUSTOM__PATH_CUSTOM_CODE   : "./cbr_community/custom"
-  CBR__CUSTOM__PACKAGES_TO_INSTALL: '["cbr_website_beta", "cbr_static", "cbr_content"]'
+  CBR__CUSTOM__PACKAGES_TO_INSTALL: '["cbr_website_beta", "cbr_static", "cbr_content", "cbr_web_components"]'
   S3_DEV__BUCKET                  : "654654216424--cbr-deploy--eu-west-1"
   S3_DEV__PARENT_FOLDER           : "cbr-custom-websites"
 

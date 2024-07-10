@@ -2,7 +2,7 @@
 export AWS_ACCOUNT_ID="654654216424"
 export AWS_DEFAULT_REGION="eu-west-1"
 export CBR__CUSTOM__PATH_CUSTOM_CODE="$PWD/custom"
-export CBR__CUSTOM__PACKAGES_TO_INSTALL='["cbr_website_beta", "cbr_static", "cbr_content"]'
+export CBR__CUSTOM__PACKAGES_TO_INSTALL='["cbr_website_beta", "cbr_static", "cbr_content", "cbr_web_components"]'
 export S3_DEV__BUCKET="654654216424--cbr-deploy--eu-west-1"
 export S3_DEV__PARENT_FOLDER="cbr-custom-websites"
 export S3_DEV__VERSION='dev__custom-version__cbr_community'
