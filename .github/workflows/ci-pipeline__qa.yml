@@ -4,7 +4,7 @@ on:
     types: [ deploy-community-qa ]
   push:
     branches:
-      - devAAAA
+      - dev
 
 env:
   GIT__BRANCH                     : 'dev'

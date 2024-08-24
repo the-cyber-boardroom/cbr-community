@@ -9,7 +9,7 @@ runs:
       shell: bash
       run: |                        
         # python_path=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
-        python_packages=$(python -c "import site; print(site.getsitepackages()[0])")
+        export python_packages=$(python -c "import site; print(site.getsitepackages()[0])")
         echo "set python_packages to  $python_packages"
         python_path__cbr_content=$python_packages/cbr_content
         echo "set python_path__cbr_content to: $python_path__cbr_content"
