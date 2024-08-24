@@ -1,5 +1,5 @@
 name: 'Update CBR Content'
-description: 'Update CBR Content'
+description: 'Update CBR Content (from Git)'
 
 runs:
   using: 'composite'
@@ -8,8 +8,12 @@ runs:
     - name: clone repo
       shell: bash
       run: |                        
-        python_path=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
-        python_path__cbr_content=$python_path/cbr_content
+        # python_path=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
+        python_packages=$(python -c "import site; print(site.getsitepackages()[0])")
+        echo "set python_packages to  $python_packages"
+        python_path__cbr_content=$python_packages/cbr_content
+        echo "sete python_path__cbr_content to: $python_path__cbr_content"
+        
         tmp_folder=/tmp        
                         
         cd $tmp_folder

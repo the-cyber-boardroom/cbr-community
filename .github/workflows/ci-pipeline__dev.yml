@@ -32,18 +32,6 @@ jobs:
         env:
           VERSION: ${{ github.event.client_payload.version }}
 
-  echo-action-script:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ env.GIT__BRANCH }}
-      - name: echo-action-script
-        run: |
-          python --version
-          cat ./.github/actions/deploy-cbr-dev-site/action.yml
-
   deploy-cbr-community-dev:
     timeout-minutes: 5
     name: "Deploy CBR - Community"
