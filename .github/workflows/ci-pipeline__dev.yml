@@ -42,7 +42,7 @@ jobs:
       - name: echo-action-script
         run: |
           python --version
-          cat ./.github/actions/deploy-cbr-dev-site
+          cat ./.github/actions/deploy-cbr-dev-site/action.yml
 
   deploy-cbr-community-dev:
     timeout-minutes: 5
