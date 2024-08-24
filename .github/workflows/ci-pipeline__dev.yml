@@ -1,5 +1,6 @@
 name       : CI Pipeline - DEV
 on:
+  workflow_dispatch:
   repository_dispatch:
     types: [ deploy-community-dev ]
   push:
