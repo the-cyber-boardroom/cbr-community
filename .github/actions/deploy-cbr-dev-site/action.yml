@@ -35,7 +35,9 @@ runs:
     - name: Copy custom code to Python site-packages
       shell: bash
       run: |
-        export python_pakages=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
+        # export python_pakages=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
+        python_packages=$(python -c "import site; print(site.getsitepackages()[0])")
+        echo "Copying custom code to: $python_packages" 
         cp -R $CBR__CUSTOM__PATH_CUSTOM_CODE/* $python_pakages
 
     - name: Run script to update S3 and Lambda (on custom CBR)
