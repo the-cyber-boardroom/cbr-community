@@ -23,7 +23,7 @@ env:
 jobs:
 
   wait-for-pypi-publish:
-    name: Wait for PYPI Publish
+    name: Wait for PYPI Publish AAAAA
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -31,6 +31,18 @@ jobs:
         uses: ./.github/actions/wait_for_pip_package
         env:
           VERSION: ${{ github.event.client_payload.version }}
+
+  echo-action-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.GIT__BRANCH }}
+      - name: echo-action-script
+        run: |
+          python --version
+          cat ./.github/actions/deploy-cbr-dev-site
 
   deploy-cbr-community-dev:
     timeout-minutes: 5
