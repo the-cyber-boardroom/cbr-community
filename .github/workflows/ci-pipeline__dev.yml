@@ -1,4 +1,4 @@
-name       : CI Pipeline - DEV
+name       : Dev - CI Pipeline
 on:
   workflow_dispatch:
   repository_dispatch:
