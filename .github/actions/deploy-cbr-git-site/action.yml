@@ -13,7 +13,16 @@ runs:
       shell: bash
       env:
         GIT_HUB__ACCESS_TOKEN: ${{ env.GIT_HUB__ACCESS_TOKEN }}
-      run: |
+        CBR__CUSTOM__VERSION_FILE: ${{ env.S3_DEV__VERSION}}
+        CBR__CUSTOM__LAMBDA_NAME: ${{ env.S3_DEV__VERSION}}
+      run: |        
+        echo "###################################"
+        echo "##### install dependencies    #####"
+        pip install cbr_website_beta
+        
+        echo "###################################"
+        echo "##### clone repos             #####"
+        
         cbr_repos=/tmp/cbr_repos
         mkdir $cbr_repos           
         echo "installing repos to $cbr_repos"
@@ -48,9 +57,6 @@ runs:
         echo "------------------------"
         echo "cbr_repos is $cbr_repos"
         echo "PYTHONPATH set to: $PYTHONPATH"
-        echo "###################################"
-        echo "##### install dependencies     #####"
-        pip install cbr_website_beta
         
         echo "****** UPDATING S3 with current custom code ******"        
 
