@@ -44,18 +44,21 @@ runs:
 
         # Export PYTHONPATH with all the necessary paths
         export PYTHONPATH=$cbr_website_beta:$cbr_athena:$cbr_static:$cbr_content:$cbr_web_components:$cbr_shared:$osbot_fast_api:$osbot_utils:$osbot_aws:$PYTHONPATH
-                
-        echo "PYTHONPATH set to: $PYTHONPATH"
-        echo "****** UPDATING S3 with current custom code ******"
-        export python_packages=$(python -c "import site; print(site.getsitepackages()[0])")
-        export cbr_website_beta=$python_packages/cbr_website_beta
-        echo "going to install from: ${cbr_website_beta}"
-        echo "-----------
+
     - name: Update Lambda function
       shell: bash
       run: |
+        echo "cbr_repos is $cbr_repos"
         echo "PYTHONPATH set to: $PYTHONPATH"
+        
         echo "****** UPDATING S3 with current custom code ******"
-        export python_packages=$(python -c "import site; print(site.getsitepackages()[0])")
-        export cbr_website_beta=$python_packages/cbr_website_beta
-        echo "going to install from: ${cbr_website_beta}"
+        cbr_website_beta=$cbr_repos/cbr_website_beta
+
+        python__publish_to_s3=${cbr_website_beta}/utils/update_from_s3/CBR__Publish_To_S3__Custom_Version.py
+        python__create_lambda=${cbr_website_beta}/utils/update_from_s3/CBR__Custom__Deploy_Lambda.py
+
+        python $python__publish_to_s3
+        python $python__create_lambda
+        echo "###################################"
+        echo "##### Deployment complete     #####"
+        echo "###################################"
