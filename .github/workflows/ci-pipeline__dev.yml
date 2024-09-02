@@ -23,6 +23,7 @@ env:
 jobs:
 
   wait-for-pypi-publish:
+    if: False
     name: Wait for PYPI Publish
     runs-on: ubuntu-latest
     steps:
