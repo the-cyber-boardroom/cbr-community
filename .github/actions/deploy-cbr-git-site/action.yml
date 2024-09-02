@@ -12,7 +12,7 @@ runs:
     - name: Install dependencies from git
       shell: bash
       env:
-        GIT_HUB__ACCESS_TOKEN: ${{ secrets.GIT_HUB__ACCESS_TOKEN }}
+        GIT_HUB__ACCESS_TOKEN: ${{ env.GIT_HUB__ACCESS_TOKEN }}
       run: |
         tmp_folder=/tmp                                
         cd $tmp_folder

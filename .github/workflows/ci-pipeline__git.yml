@@ -9,6 +9,7 @@ on:
 
 env:
   GIT__BRANCH                     : 'dev'
+  GIT_HUB__ACCESS_TOKEN           : ${{ secrets.GIT_HUB__ACCESS_TOKEN               }}
   PACKAGE_NAME                    : 'cbr_community'
   AWS_ACCESS_KEY_ID               : ${{ secrets.AWS_ACCESS_KEY_ID__470426667096     }}
   AWS_SECRET_ACCESS_KEY           : ${{ secrets.AWS_SECRET_ACCESS_KEY__470426667096 }}
