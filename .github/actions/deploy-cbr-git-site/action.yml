@@ -45,9 +45,7 @@ runs:
         # Export PYTHONPATH with all the necessary paths
         export PYTHONPATH=$cbr_website_beta:$cbr_athena:$cbr_static:$cbr_content:$cbr_web_components:$cbr_shared:$osbot_fast_api:$osbot_utils:$osbot_aws:$PYTHONPATH
 
-#    - name: Update Lambda function
-#      shell: bash
-#      run: |
+        echo "------------------------"
         echo "cbr_repos is $cbr_repos"
         echo "PYTHONPATH set to: $PYTHONPATH"
         
@@ -62,3 +60,8 @@ runs:
         echo "###################################"
         echo "##### Deployment complete     #####"
         echo "###################################"
+        
+
+#    - name: Update Lambda function
+#      shell: bash
+#      run: |
