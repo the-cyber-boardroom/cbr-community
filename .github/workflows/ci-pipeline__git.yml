@@ -2,7 +2,7 @@ name       : GIT - CI Pipeline
 on:
   workflow_dispatch:
   repository_dispatch:
-    types: [ deploy-community-dev ]
+    types: [ deploy-community-git ]
   push:
     branches:
       - dev
@@ -27,6 +27,7 @@ jobs:
     name: Deploy cbr-community from GIT
     runs-on: ubuntu-latest
     env:
+      VERSION: ${{ github.event.client_payload.version }}
       S3_DEV__VERSION: 'git__custom-version__cbr_community'
     steps:
       - uses: actions/checkout@v4
