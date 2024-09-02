@@ -14,10 +14,11 @@ runs:
       env:
         GIT_HUB__ACCESS_TOKEN: ${{ env.GIT_HUB__ACCESS_TOKEN }}
       run: |
-        mkdir /tmp/cbr_repos
-        cbr_repos=/tmp   
+        cbr_repos=/tmp/cbr_repos
+        mkdir $cbr_repos           
         echo "installing repos to $cbr_repos"
         cd $cbr_repos
+        pwd
         ls -la
         git clone --branch dev https://github.com/owasp-sbot/OSBot-AWS.git
         git clone --branch dev https://github.com/owasp-sbot/OSBot-Utils.git
