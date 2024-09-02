@@ -11,13 +11,16 @@ runs:
 
     - name: Install dependencies from git
       shell: bash
+      env:
+        GIT_HUB__ACCESS_TOKEN: ${{ secrets.GIT_HUB__ACCESS_TOKEN }}
       run: |
         tmp_folder=/tmp                                
         cd $tmp_folder
         ls -la
         git clone --branch dev https://github.com/the-cyber-boardroom/cbr-content.git
-        git clone --branch dev https://github.com/the-cyber-boardroom/cbr-static.git
-        git clone --branch dev https://github.com/the-cyber-boardroom/cbr-web-components.git
-        git clone --branch dev https://github.com/the-cyber-boardroom/cbr-website-beta.git
-        git clone --branch dev https://github.com/the-cyber-boardroom/cbr-athena.git
+        git clone --branch dev https://x-access-token:${GIT_HUB__ACCESS_TOKEN}@github.com/the-cyber-boardroom/cbr-static.git
+        git clone --branch dev https://x-access-token:${GIT_HUB__ACCESS_TOKEN}@github.com/the-cyber-boardroom/cbr-web-components.git
+        git clone --branch dev https://x-access-token:${GIT_HUB__ACCESS_TOKEN}@github.com/the-cyber-boardroom/cbr-website-beta.git
+        git clone --branch dev https://x-access-token:${GIT_HUB__ACCESS_TOKEN}@github.com/the-cyber-boardroom/cbr-athena.git
+    
         ls -la
