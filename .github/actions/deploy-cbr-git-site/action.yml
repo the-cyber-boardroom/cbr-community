@@ -49,11 +49,10 @@ runs:
         echo "cbr_repos is $cbr_repos"
         echo "PYTHONPATH set to: $PYTHONPATH"
         
-        echo "****** UPDATING S3 with current custom code ******"
-        cbr_website_beta=$cbr_repos/cbr_website_beta
+        echo "****** UPDATING S3 with current custom code ******"        
 
-        python__publish_to_s3=${cbr_website_beta}/utils/update_from_s3/CBR__Publish_To_S3__Custom_Version.py
-        python__create_lambda=${cbr_website_beta}/utils/update_from_s3/CBR__Custom__Deploy_Lambda.py
+        python__publish_to_s3=$cbr_website_beta/cbr_website_beta/utils/update_from_s3/CBR__Publish_To_S3__Custom_Version.py
+        python__create_lambda=$cbr_website_beta/cbr_website_beta/utils/update_from_s3/CBR__Custom__Deploy_Lambda.py
 
         python $python__publish_to_s3
         python $python__create_lambda
