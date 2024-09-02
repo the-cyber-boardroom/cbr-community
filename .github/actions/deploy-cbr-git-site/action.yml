@@ -48,6 +48,9 @@ runs:
         echo "------------------------"
         echo "cbr_repos is $cbr_repos"
         echo "PYTHONPATH set to: $PYTHONPATH"
+        echo "###################################"
+        echo "##### install dependencies     #####"
+        pip install cbr_website_beta
         
         echo "****** UPDATING S3 with current custom code ******"        
 
