@@ -7,8 +7,7 @@ runs:
 
     - name: clone repo
       shell: bash
-      run: |                        
-        # python_path=/opt/hostedtoolcache/Python/3.12.4/x64/lib/python3.12/site-packages
+      run: |                                
         export python_packages=$(python -c "import site; print(site.getsitepackages()[0])")
         echo "set python_packages to  $python_packages"
         python_path__cbr_content=$python_packages/cbr_content
