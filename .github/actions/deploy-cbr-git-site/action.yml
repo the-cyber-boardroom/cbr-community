@@ -16,7 +16,8 @@ runs:
       run: |
         mkdir /tmp/cbr_repos
         cbr_repos=/tmp   
-        cd "installing repos to $cbr_repos"
+        echo "installing repos to $cbr_repos"
+        cd $cbr_repos
         ls -la
         git clone --branch dev https://github.com/owasp-sbot/OSBot-AWS.git
         git clone --branch dev https://github.com/owasp-sbot/OSBot-Utils.git
