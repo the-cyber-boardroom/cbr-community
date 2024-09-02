@@ -15,11 +15,7 @@ runs:
         GIT_HUB__ACCESS_TOKEN: ${{ env.GIT_HUB__ACCESS_TOKEN }}
         CBR__CUSTOM__VERSION_FILE: ${{ env.S3_DEV__VERSION}}
         CBR__CUSTOM__LAMBDA_NAME: ${{ env.S3_DEV__VERSION}}
-      run: |        
-        echo "###################################"
-        echo "##### install dependencies    #####"
-        pip install cbr_website_beta
-        
+      run: |                
         echo "###################################"
         echo "##### clone repos             #####"
         
@@ -54,9 +50,9 @@ runs:
         # Export PYTHONPATH with all the necessary paths
         export PYTHONPATH=$cbr_website_beta:$cbr_athena:$cbr_static:$cbr_content:$cbr_web_components:$cbr_shared:$osbot_fast_api:$osbot_utils:$osbot_aws:$PYTHONPATH
 
-        echo "------------------------"
-        echo "cbr_repos is $cbr_repos"
-        echo "PYTHONPATH set to: $PYTHONPATH"
+        echo "###################################"
+        echo "##### install dependencies    #####"
+        pip install cbr_website_beta                
         
         echo "****** UPDATING S3 with current custom code ******"        
 
@@ -69,7 +65,3 @@ runs:
         echo "##### Deployment complete     #####"
         echo "###################################"
         
-
-#    - name: Update Lambda function
-#      shell: bash
-#      run: |
