@@ -26,6 +26,8 @@ jobs:
   deploy-cbr-git-site:
     name: Deploy cbr-community from GIT
     runs-on: ubuntu-latest
+    env:
+      S3_DEV__VERSION: 'git__custom-version__cbr_community'
     steps:
       - uses: actions/checkout@v4
       - name: deploy-cbr-git-site
