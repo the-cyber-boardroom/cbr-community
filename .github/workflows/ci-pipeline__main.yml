@@ -1,4 +1,4 @@
-name       : CI Pipeline - MAIN
+name       : Prod - CI Pipeline
 on:
   repository_dispatch:
     types: [ deploy-community-prod ]

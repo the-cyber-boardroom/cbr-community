@@ -1,4 +1,4 @@
-name       : CI Pipeline - DEV (QA)
+name       : QA - CI Pipeline
 on:
   repository_dispatch:
     types: [ deploy-community-qa ]
@@ -22,6 +22,7 @@ env:
 jobs:
 
   increment-tag:
+    #if: False
     name: Increment Tag - DEV
     runs-on: ubuntu-latest
     steps:

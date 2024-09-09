@@ -1,0 +1,67 @@
+name: 'deploy-cbr-git-site'
+description: 'deploy-cbr-git-site'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Install dependencies from git
+      shell: bash
+      env:
+        GIT_HUB__ACCESS_TOKEN: ${{ env.GIT_HUB__ACCESS_TOKEN }}
+        CBR__CUSTOM__VERSION_FILE: ${{ env.S3_DEV__VERSION}}
+        CBR__CUSTOM__LAMBDA_NAME: ${{ env.S3_DEV__VERSION}}
+      run: |                
+        echo "###################################"
+        echo "##### clone repos             #####"
+        
+        cbr_repos=/tmp/cbr_repos
+        mkdir $cbr_repos           
+        echo "installing repos to $cbr_repos"
+        cd $cbr_repos
+        pwd
+        ls -la
+        git clone --branch dev https://github.com/owasp-sbot/OSBot-AWS.git
+        git clone --branch dev https://github.com/owasp-sbot/OSBot-Utils.git
+        git clone --branch dev https://github.com/owasp-sbot/OSBot-Fast-API.git
+        git clone --branch dev https://x-access-token:${GIT_HUB__ACCESS_TOKEN}@github.com/the-cyber-boardroom/cbr-athena.git
+        git clone --branch dev https://x-access-token:${GIT_HUB__ACCESS_TOKEN}@github.com/the-cyber-boardroom/cbr-content.git
+        git clone --branch dev https://x-access-token:${GIT_HUB__ACCESS_TOKEN}@github.com/the-cyber-boardroom/cbr-shared.git
+        git clone --branch dev https://x-access-token:${GIT_HUB__ACCESS_TOKEN}@github.com/the-cyber-boardroom/cbr-static.git
+        git clone --branch dev https://x-access-token:${GIT_HUB__ACCESS_TOKEN}@github.com/the-cyber-boardroom/cbr-web-components.git
+        git clone --branch dev https://x-access-token:${GIT_HUB__ACCESS_TOKEN}@github.com/the-cyber-boardroom/cbr-website-beta.git
+        
+        # Define paths to the cloned repos
+        cbr_website_beta=$cbr_repos/cbr-website-beta
+        cbr_athena=$cbr_repos/cbr-athena
+        cbr_static=$cbr_repos/cbr-static
+        cbr_content=$cbr_repos/cbr-content
+        cbr_web_components=$cbr_repos/cbr-web-components
+        cbr_shared=$cbr_repos/cbr-shared
+        
+        osbot_aws=$cbr_repos/OSBot-AWS
+        osbot_fast_api=$cbr_repos/OSBot-Fast-API
+        osbot_utils=$cbr_repos/OSBot-Utils
+
+        # Export PYTHONPATH with all the necessary paths
+        export PYTHONPATH=$cbr_website_beta:$cbr_athena:$cbr_static:$cbr_content:$cbr_web_components:$cbr_shared:$osbot_fast_api:$osbot_utils:$osbot_aws:$PYTHONPATH
+
+        echo "###################################"
+        echo "##### install dependencies    #####"
+        pip install cbr_website_beta                
+        
+        echo "****** UPDATING S3 with current custom code ******"        
+
+        python__publish_to_s3=$cbr_website_beta/cbr_website_beta/utils/update_from_s3/CBR__Publish_To_S3__Custom_Version.py
+        python__create_lambda=$cbr_website_beta/cbr_website_beta/utils/update_from_s3/CBR__Custom__Deploy_Lambda.py
+
+        python $python__publish_to_s3
+        python $python__create_lambda
+        echo "###################################"
+        echo "##### Deployment complete     #####"
+        echo "###################################"
+        
