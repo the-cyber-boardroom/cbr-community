@@ -1,6 +1,6 @@
 [tool.poetry]
 name        = "cbr_community"
-version     = "v0.45.15"
+version     = "v0.45.16"
 description = "CBR - Community"
 authors     = ["Dinis Cruz <dinis.cruz@owasp.org>"]
 license     = "MIT"
