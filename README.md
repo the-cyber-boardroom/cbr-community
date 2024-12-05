@@ -6,5 +6,5 @@ This is the template for the other projects and builds up the main CI/CD pipelin
 
 ## Repo details
 
-![Current Release](https://img.shields.io/badge/release-v0.45.17-blue)
+![Current Release](https://img.shields.io/badge/release-v0.46.1-blue)
 
